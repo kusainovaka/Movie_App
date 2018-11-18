@@ -103,13 +103,10 @@
 		8E1A20AA21A0AEA600621375 /* MovieApp */ = {
 			isa = PBXGroup;
 			children = (
-				8E1A20AB21A0AEA600621375 /* AppDelegate.swift */,
-				8E1A20AD21A0AEA600621375 /* MenuViewController.swift */,
-				8E6A399921A11ECF00D8B5AA /* VideoViewController.swift */,
-				8E1A20D921A0B08400621375 /* VideoCell.swift */,
-				8E6A399721A1170200D8B5AA /* Extension.swift */,
+				8E6A39A121A1906200D8B5AA /* Controller */,
+				8E6A39A221A1907400D8B5AA /* View */,
+				8E6A39A321A1908100D8B5AA /* Supports file */,
 				8E1A20B221A0AEAA00621375 /* Assets.xcassets */,
-				8E1A20B421A0AEAA00621375 /* LaunchScreen.storyboard */,
 				8E6A399F21A17EC600D8B5AA /* Main_iPad.mp4 */,
 				8E1A20B721A0AEAA00621375 /* Info.plist */,
 			);
@@ -132,6 +129,33 @@
 				8E1A20CD21A0AEAA00621375 /* Info.plist */,
 			);
 			path = MovieAppUITests;
+			sourceTree = "<group>";
+		};
+		8E6A39A121A1906200D8B5AA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8E1A20AD21A0AEA600621375 /* MenuViewController.swift */,
+				8E6A399921A11ECF00D8B5AA /* VideoViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8E6A39A221A1907400D8B5AA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8E1A20D921A0B08400621375 /* VideoCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8E6A39A321A1908100D8B5AA /* Supports file */ = {
+			isa = PBXGroup;
+			children = (
+				8E1A20AB21A0AEA600621375 /* AppDelegate.swift */,
+				8E6A399721A1170200D8B5AA /* Extension.swift */,
+				8E1A20B421A0AEAA00621375 /* LaunchScreen.storyboard */,
+			);
+			path = "Supports file";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
