@@ -56,7 +56,7 @@ class MenuViewController: UIViewController {
         [backgroundImage.leftAnchor.constraint(equalTo: view.leftAnchor),
          backgroundImage.rightAnchor.constraint(equalTo: view.rightAnchor),
          backgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-         backgroundImage.topAnchor.constraint(equalTo: view.topAnchor)].forEach {
+         backgroundImage.topAnchor.constraint(equalTo: view.topAnchor) ].forEach {
             $0.isActive = true
         }
         
@@ -64,8 +64,7 @@ class MenuViewController: UIViewController {
         [ktkLogo.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -45),
          ktkLogo.topAnchor.constraint(equalTo: view.topAnchor, constant: 45),
          ktkLogo.widthAnchor.constraint(equalToConstant: 190),
-         ktkLogo.heightAnchor.constraint(equalToConstant: 80)
-            ].forEach {
+         ktkLogo.heightAnchor.constraint(equalToConstant: 80) ].forEach {
                 $0.isActive = true
         }
         
@@ -73,8 +72,7 @@ class MenuViewController: UIViewController {
         [namysLogo.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
          namysLogo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
          namysLogo.widthAnchor.constraint(equalToConstant: (screenHeight - 50) / 1.8),
-         namysLogo.heightAnchor.constraint(equalToConstant: (screenHeight - 50) / 1.8)
-            ].forEach {
+         namysLogo.heightAnchor.constraint(equalToConstant: (screenHeight - 50) / 1.8) ].forEach {
                 $0.isActive = true
         }
         
@@ -86,8 +84,7 @@ class MenuViewController: UIViewController {
         [collectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
          collectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
          collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: (screenHeight / 2) + 120),
-         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            ].forEach {
+         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor) ].forEach {
                 $0.isActive = true
         }
     }
@@ -103,7 +100,7 @@ class MenuViewController: UIViewController {
         do {
             let fileURLs = try fileManager.contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil)
             fileURLs.forEach { (name) in
-                let nameVideo = name.absoluteString
+               let nameVideo = name.absoluteString
                 videoName.append(nameVideo)
             }
         } catch {
@@ -114,7 +111,7 @@ class MenuViewController: UIViewController {
     func removeString(_ sentence: String) -> String {
         var documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].absoluteString
         documentsURL.insert(string: "/private", int: 7)
-        var allString = sentence
+        guard var allString = sentence.removingPercentEncoding else { return " " }
         if let range = allString.range(of: documentsURL) {
             allString.removeSubrange(range)
         }

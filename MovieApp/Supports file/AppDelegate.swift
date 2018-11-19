@@ -21,30 +21,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func splashVideo() {
+        let screen = UIScreen.main.bounds
         let launchVC = UIStoryboard.init(name: "LaunchScreen", bundle: nil)
         let rootVC = launchVC.instantiateViewController(withIdentifier: "splashController")
-        let videoView = UIView(frame: UIScreen.main.bounds)
+        let videoView = UIView(frame: screen)
         
         let videoUrl = URL(fileURLWithPath: Bundle.main.path(forResource: "Main_iPad", ofType: "mp4")!)
         let player = AVPlayer(url: videoUrl)
         
         let videoSubLayer = AVPlayerLayer(player: player)
-        videoSubLayer.frame = UIScreen.main.bounds
+        videoSubLayer.frame = screen
         videoView.layer.addSublayer(videoSubLayer)
         videoSubLayer.videoGravity = .resizeAspectFill
         player.play()
         player.actionAtItemEnd = .none
         
+        let skipButton = UIButton(frame: CGRect(x: screen.width - 120, y: screen.height - 50, width: 120, height: 50))
+        skipButton.addTarget(self, action: #selector(dismissLaunchVC), for: .touchUpInside)
+        skipButton.backgroundColor = UIColor.init(white: 1, alpha: 0.2)
+        skipButton.setTitle("Пропустить", for: .normal)
+        videoView.addSubview(skipButton)
+        
         rootVC.view.addSubview(videoView)
         window?.rootViewController = rootVC
         window?.makeKeyAndVisible()
         
-        Timer.scheduledTimer(timeInterval: 7, target: self, selector: #selector(dismissLaunchVC), userInfo: nil, repeats: false)
+        NotificationCenter.default.addObserver(self, selector: #selector(dismissLaunchVC), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player.currentItem)
     }
     
     @objc func dismissLaunchVC() {
-        window?.rootViewController = MenuViewController()
-        window?.makeKeyAndVisible()
+        guard let myWindow = window else { return }
+        UIView.transition(with: myWindow , duration: 0.3, options: .transitionCrossDissolve, animations: {
+            myWindow.rootViewController = MenuViewController()
+            myWindow.makeKeyAndVisible()
+        }, completion: nil)
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
@@ -68,6 +78,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
+    
 }
 
