@@ -36,12 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         player.play()
         player.actionAtItemEnd = .none
         
-        let skipButton = UIButton(frame: CGRect(x: screen.width - 120, y: screen.height - 50, width: 120, height: 50))
-        skipButton.addTarget(self, action: #selector(dismissLaunchVC), for: .touchUpInside)
-        skipButton.backgroundColor = UIColor.init(white: 1, alpha: 0.2)
-        skipButton.setTitle("Пропустить", for: .normal)
-        videoView.addSubview(skipButton)
-        
         rootVC.view.addSubview(videoView)
         window?.rootViewController = rootVC
         window?.makeKeyAndVisible()
@@ -67,8 +61,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
     
+    
     func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        splashVideo()
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {

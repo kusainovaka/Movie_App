@@ -19,7 +19,7 @@ class MenuViewController: UIViewController {
         return image
     }()
     
-    let namysLogo: UIImageView = {
+    let logoName: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
         image.image = #imageLiteral(resourceName: "02_Logo")
@@ -27,10 +27,10 @@ class MenuViewController: UIViewController {
         return image
     }()
     
-    let ktkLogo: UIImageView = {
+    let logoImage: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
-        image.image = #imageLiteral(resourceName: "05_LogoKTK")
+        image.image = #imageLiteral(resourceName: "03_Logo")
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
@@ -46,7 +46,8 @@ class MenuViewController: UIViewController {
         return collectionView
     }()
     
-    var videoName = [String]()
+    var cellName = "VideoCell"
+    var videoModel = [VideoModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,19 +61,19 @@ class MenuViewController: UIViewController {
             $0.isActive = true
         }
         
-        view.addSubview(ktkLogo)
-        [ktkLogo.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -45),
-         ktkLogo.topAnchor.constraint(equalTo: view.topAnchor, constant: 45),
-         ktkLogo.widthAnchor.constraint(equalToConstant: 190),
-         ktkLogo.heightAnchor.constraint(equalToConstant: 80) ].forEach {
+        view.addSubview(logoImage)
+        [logoImage.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -45),
+         logoImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 45),
+         logoImage.widthAnchor.constraint(equalToConstant: 190),
+         logoImage.heightAnchor.constraint(equalToConstant: 80) ].forEach {
                 $0.isActive = true
         }
         
-        view.addSubview(namysLogo)
-        [namysLogo.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
-         namysLogo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-         namysLogo.widthAnchor.constraint(equalToConstant: (screenHeight - 50) / 1.8),
-         namysLogo.heightAnchor.constraint(equalToConstant: (screenHeight - 50) / 1.8) ].forEach {
+        view.addSubview(logoName)
+        [logoName.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
+         logoName.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+         logoName.widthAnchor.constraint(equalToConstant: (screenHeight - 50) / 1.8),
+         logoName.heightAnchor.constraint(equalToConstant: (screenHeight - 50) / 1.8) ].forEach {
                 $0.isActive = true
         }
         
@@ -80,7 +81,7 @@ class MenuViewController: UIViewController {
         collectionView.backgroundColor = .clear
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(VideoCell.self, forCellWithReuseIdentifier: "VideoCell")
+        collectionView.register(VideoCell.self, forCellWithReuseIdentifier: cellName)
         [collectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
          collectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
          collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: (screenHeight / 2) + 120),
@@ -91,6 +92,7 @@ class MenuViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // need to call once
         getVideo()
     }
     
@@ -100,8 +102,10 @@ class MenuViewController: UIViewController {
         do {
             let fileURLs = try fileManager.contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil)
             fileURLs.forEach { (name) in
-               let nameVideo = name.absoluteString
-                videoName.append(nameVideo)
+                let videoUrl = name.absoluteString
+                let nameVideo = removeString(name.absoluteString)
+                let model = VideoModel(name: removeString(nameVideo), url: videoUrl)
+                videoModel.append(model)
             }
         } catch {
             debugPrint("Error while enumerating files \(documentsURL.path): \(error.localizedDescription)")
@@ -121,21 +125,22 @@ class MenuViewController: UIViewController {
 
 extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return videoName.count
+        return videoModel.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VideoCell", for: indexPath) as! VideoCell
-        cell.videoName(removeString(videoName[indexPath.row]))
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellName, for: indexPath) as! VideoCell
+        // need to call once
+        cell.videoName(videoModel[indexPath.row].name)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let videoUrl = URL(string: videoName[indexPath.row])
+        let videoUrl = URL(string: videoModel[indexPath.row].url)
         let player = AVPlayer(url: videoUrl!)
         let videoVC = VideoViewController()
         videoVC.playerCV = player
-        videoVC.movieName = removeString(videoName[indexPath.row])
+        videoVC.movieName = videoModel[indexPath.row].name
         present(videoVC, animated: true, completion: nil)
     }
 }

@@ -16,7 +16,8 @@
 		8E1A20DA21A0B08400621375 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1A20D921A0B08400621375 /* VideoCell.swift */; };
 		8E6A399821A1170200D8B5AA /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6A399721A1170200D8B5AA /* Extension.swift */; };
 		8E6A399A21A11ECF00D8B5AA /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6A399921A11ECF00D8B5AA /* VideoViewController.swift */; };
-		8E6A39A021A17EC600D8B5AA /* Main_iPad.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 8E6A399F21A17EC600D8B5AA /* Main_iPad.mp4 */; };
+		8E8035F222511368009E31C2 /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8035F122511368009E31C2 /* VideoModel.swift */; };
+		8E8035F6225137AA009E31C2 /* Main_iPad.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 8E8035F5225137AA009E31C2 /* Main_iPad.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +53,8 @@
 		8E1A20D921A0B08400621375 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		8E6A399721A1170200D8B5AA /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		8E6A399921A11ECF00D8B5AA /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
-		8E6A399F21A17EC600D8B5AA /* Main_iPad.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Main_iPad.mp4; sourceTree = "<group>"; };
+		8E8035F122511368009E31C2 /* VideoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
+		8E8035F5225137AA009E31C2 /* Main_iPad.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Main_iPad.mp4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,11 +105,12 @@
 		8E1A20AA21A0AEA600621375 /* MovieApp */ = {
 			isa = PBXGroup;
 			children = (
+				8E8035F022511353009E31C2 /* Model */,
 				8E6A39A121A1906200D8B5AA /* Controller */,
 				8E6A39A221A1907400D8B5AA /* View */,
 				8E6A39A321A1908100D8B5AA /* Supports file */,
 				8E1A20B221A0AEAA00621375 /* Assets.xcassets */,
-				8E6A399F21A17EC600D8B5AA /* Main_iPad.mp4 */,
+				8E8035F5225137AA009E31C2 /* Main_iPad.mp4 */,
 				8E1A20B721A0AEAA00621375 /* Info.plist */,
 			);
 			path = MovieApp;
@@ -156,6 +159,14 @@
 				8E1A20B421A0AEAA00621375 /* LaunchScreen.storyboard */,
 			);
 			path = "Supports file";
+			sourceTree = "<group>";
+		};
+		8E8035F022511353009E31C2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8E8035F122511368009E31C2 /* VideoModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,9 +273,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E8035F6225137AA009E31C2 /* Main_iPad.mp4 in Resources */,
 				8E1A20B621A0AEAA00621375 /* LaunchScreen.storyboard in Resources */,
 				8E1A20B321A0AEAA00621375 /* Assets.xcassets in Resources */,
-				8E6A39A021A17EC600D8B5AA /* Main_iPad.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E1A20AE21A0AEA600621375 /* MenuViewController.swift in Sources */,
+				8E8035F222511368009E31C2 /* VideoModel.swift in Sources */,
 				8E6A399A21A11ECF00D8B5AA /* VideoViewController.swift in Sources */,
 				8E1A20AC21A0AEA600621375 /* AppDelegate.swift in Sources */,
 				8E1A20DA21A0B08400621375 /* VideoCell.swift in Sources */,
